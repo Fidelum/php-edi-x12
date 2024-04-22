@@ -5,7 +5,7 @@ namespace Mrstroz\Edi\Segments;
 use Mrstroz\Edi\Segment;
 
 /**
- * Class BegSegment
+ * Class B4Segment
  * @package Mrstroz\Edi\Segments
  */
 class B4Segment extends Segment
