@@ -68,16 +68,12 @@ class Edi
      */
     public static function parse($res)
     {
-        $string = '';
-        $segments = array();
-
         if (!$res) {
             throw new \Exception('No resource or string passed to parse()');
         }
 
         $documents = array();
         if (is_resource($res)) {
-            $res = $data;
             $meta = stream_get_meta_data($res);
             if (!$meta['seekable']) {
                 throw new \Exception('Stream is not seekable');
@@ -95,11 +91,9 @@ class Edi
             $element_separator = substr($data, self::ELEMENT_SEPARATOR_POSITION, 1);
             $subelement_separator = substr($data, self::SUBELEMENT_SEPARATOR_POSITION, 1);
 
-            $document = null;
             $raw_segments = explode($segment_terminator, $data);
         }
 
-        $isas = array();
         $current_isa = null;
         $current_gs = null;
         $current_st = null;
