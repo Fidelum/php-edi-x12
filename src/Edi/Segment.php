@@ -60,7 +60,11 @@ class Segment implements SegmentInterface
                 $segmentMapping = array_slice($segmentMapping, 0, $array[self::MAX_SEGMENTS_KEY] + 1);
             }
             foreach ($segmentMapping as $index => $key) {
-                $value = preg_replace("/\r\n|\r|\n/", " ", $array[$key] ?? '');
+                $value = $array[$key] ?? '';
+                // Remove line breaks
+                $value = preg_replace("/\r\n|\r|\n/", " ", $value);
+                // Remove asterisk (delimiter)
+                $value = str_replace("*", "#", $value);
                 if (isset($this->callFunction[$index])) {
                     $value = call_user_func_array($this->callFunction[$index]['name'], array_merge([$value], $this->callFunction[$index]['args']));
                 }
